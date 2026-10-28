@@ -6,11 +6,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/Leo-dlz/plateforme-devops.git'
+    repoURL: https://github.com/Leo-dlz/plateforme-devops.git
     targetRevision: main
     path: deploy/overlays/prod
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
     namespace: prod
   syncPolicy:
     automated:
