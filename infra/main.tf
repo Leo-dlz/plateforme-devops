@@ -1,22 +1,19 @@
-resource "kind_cluster" "this" {
-  name           = "plateforme"
-  wait_for_ready = true
-}
 provider "helm" {
   kubernetes = {
-    host                   = kind_cluster.this.endpoint
-    client_certificate     = kind_cluster.this.client_certificate
-    client_key             = kind_cluster.this.client_key
-    cluster_ca_certificate = kind_cluster.this.cluster_ca_certificate
+    host                   = module.cluster.endpoint
+    client_certificate     = module.cluster.client_certificate
+    client_key             = module.cluster.client_key
+    cluster_ca_certificate = module.cluster.cluster_ca_certificate
   }
 }
 
-resource "helm_release" "argocd" {
-  name             = "argocd"
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  namespace        = "argocd"
-  version          = "10.10.3"
-  create_namespace = true
-  timeout          = 600
+module "cluster" {
+  source = "./modules/cluster"
+  nom    = "plateforme"
+}
+
+module "argocd" {
+  source        = "./modules/argocd"
+  version_chart = "10.10.3"
+  depends_on    = [module.cluster]
 }
