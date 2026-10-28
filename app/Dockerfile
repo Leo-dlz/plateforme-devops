@@ -1,3 +1,4 @@
+# TP3 : declenchement du pipeline CI
 # Image de base volontairement ancienne : elle sera corrigée plus tard dans le cours.
 FROM python:3.9-slim-buster
 WORKDIR /app
