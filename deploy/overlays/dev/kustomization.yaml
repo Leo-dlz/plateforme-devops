@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: dev
 
 resources:
-  - ../../base
+- ../../base
 
 images:
-  - name: api
-    newName: api
-    newTag: initial
+- name: api
+  newName: ghcr.io/leo-dlz/plateforme-devops
+  newTag: aa28b7e3
